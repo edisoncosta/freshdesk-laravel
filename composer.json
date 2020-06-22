@@ -1,0 +1,32 @@
+{
+    "name": "kepcloud/freshdesk-laravel",
+    "description": "Laravel 6 package for the Freshdesk API (v2)",
+    "homepage": "https://github.com/edisoncosta/freshdesk-laravel",
+    "keywords": ["freshdesk", "customer service", "support", "help desk", "api", "laravel"],
+    "type": "laravel-package",
+    "require": {
+        "php": ">=7.0.0",
+        "keepcloud/freshdesk-php-sdk": "^1.0",
+        "illuminate/support": "^6.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthew Clarkson",
+            "email": "Keepcloud@gmail.com",
+            "homepage": "http://Keepcloud.github.io/"
+        },
+        {
+            "name": "Edison Costa",
+            "email": "edison@keepcloud.io",
+            "homepage": "https://keepcloud.io/"
+        }
+
+    ],
+    "minimum-stability": "dev",
+    "autoload" : {
+        "psr-4": {
+            "keepcloud\\Laravel\\Freshdesk\\": "src/"
+        }
+    }
+}
