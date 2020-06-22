@@ -1,6 +1,6 @@
 # Freshdesk Service Provider for Laravel 6
 
-[![Packagist](https://img.shields.io/packagist/v/keppcloud/freshdesk-php-sdk.svg)](https://packagist.org/packages/keepcloud/freshdesk-php-sdk)
+[![Packagist](https://img.shields.io/packagist/v/keepcloud/freshdesk-php-sdk.svg)](https://packagist.org/packages/keepcloud/freshdesk-php-sdk)
 
 This is a service provider for interacting with the Freshdesk API v2 via the 
 [freshdesk-php-sdk](https://github.com/keepcloud/freshdesk-php-sdk) in Laravel and Lumen applications.
