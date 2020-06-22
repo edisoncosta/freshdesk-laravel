@@ -1,5 +1,5 @@
 {
-    "name": "kepcloud/freshdesk-laravel",
+    "name": "keepcloud/freshdesk-laravel",
     "description": "Laravel 6 package for the Freshdesk API (v2)",
     "homepage": "https://github.com/edisoncosta/freshdesk-laravel",
     "keywords": ["freshdesk", "customer service", "support", "help desk", "api", "laravel"],
