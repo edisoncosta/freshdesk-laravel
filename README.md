@@ -14,7 +14,7 @@ Add `keepcloud/freshdesk-laravel` to your **composer.json** file:
 ```json
 {
     "require": {
-        "keepcloud/freshdesk-laravel": "dev-master"
+        "keepcloud/freshdesk-laravel": "^1.0"
     }
 }
 ```
