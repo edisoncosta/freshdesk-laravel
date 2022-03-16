@@ -1,4 +1,4 @@
-# Freshdesk Service Provider for Laravel 6
+# Freshdesk Service Provider for Laravel 7 and 8
 
 [![Packagist](https://img.shields.io/badge/Packagist-freshdesk--laravel-blue)](https://packagist.org/packages/keepcloud/freshdesk-php-sdk)
 

@@ -1,13 +1,13 @@
 {
     "name": "keepcloud/freshdesk-laravel",
-    "description": "Laravel 6 package for the Freshdesk API (v2)",
+    "description": "Laravel 7 and 8 package for the Freshdesk API (v2)",
     "homepage": "https://github.com/edisoncosta/freshdesk-laravel",
     "keywords": ["freshdesk", "customer service", "support", "help desk", "api", "laravel"],
     "type": "laravel-package",
     "require": {
-        "php": ">=7.0.0",
+        "php": ">7.2.5",
         "keepcloud/freshdesk-php-sdk": "^1.0",
-        "illuminate/support": "^6.0"
+        "illuminate/support": "7.*|8.*"
     },
     "license": "MIT",
     "authors": [
