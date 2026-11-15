@@ -2,50 +2,40 @@
 
 namespace Keepcloud\Laravel\Freshdesk;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Foundation\Application as LaravelApplication;
-use Laravel\Lumen\Application as LumenApplication;
 
 class FreshdeskServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap the application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $source = dirname(__DIR__).'/src/config/freshdesk.php';
-
-        if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
-            $this->publishes([$source => config_path('freshdesk.php')]);
-        } elseif ($this->app instanceof LumenApplication) {
-            $this->app->configure('freshdesk');
-        }
-        $this->mergeConfigFrom($source, 'freshdesk');
-    }
-
-    /**
      * Register the application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
-        $this->app->singleton('freshdesk', function ($app) {
-            $config = $app->make('config')->get('freshdesk');
-            return new Api($config['api_key'], $config['domain']);
+        $this->mergeConfigFrom(__DIR__.'/../config/freshdesk.php', 'freshdesk');
+
+        $this->app->singleton('freshdesk', function (Application $app) {
+            $config = $app->make('config')->get('freshdesk', []);
+
+            return new Api(
+                (string) ($config['api_key'] ?? ''),
+                (string) ($config['domain'] ?? ''),
+                (array) ($config['http'] ?? [])
+            );
         });
+
         $this->app->alias('freshdesk', Api::class);
     }
 
     /**
-     * Get the services provided by the provider.
-     *
-     * @return array
+     * Bootstrap the application services.
      */
-    public function provides()
+    public function boot(): void
     {
-        return ['freshdesk', Api::class];
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config/freshdesk.php' => config_path('freshdesk.php'),
+            ], 'freshdesk-config');
+        }
     }
 }
