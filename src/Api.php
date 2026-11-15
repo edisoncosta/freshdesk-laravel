@@ -3,140 +3,158 @@
 namespace Keepcloud\Laravel\Freshdesk;
 
 use Freshdesk\Api as Freshdesk;
+use Freshdesk\Resources\Agent;
+use Freshdesk\Resources\Article;
+use Freshdesk\Resources\BusinessHour;
+use Freshdesk\Resources\Comment;
+use Freshdesk\Resources\Company;
+use Freshdesk\Resources\Contact;
+use Freshdesk\Resources\Conversation;
+use Freshdesk\Resources\Discussion;
+use Freshdesk\Resources\EmailConfig;
+use Freshdesk\Resources\Folder;
+use Freshdesk\Resources\Forum;
+use Freshdesk\Resources\Group;
+use Freshdesk\Resources\Product;
+use Freshdesk\Resources\SLAPolicy;
+use Freshdesk\Resources\Solution;
+use Freshdesk\Resources\Ticket;
+use Freshdesk\Resources\TimeEntry;
+use Freshdesk\Resources\Topic;
 
-class Api {
+class Api
+{
+    private Freshdesk $api;
 
     /**
-     * @var Freshdesk
+     * @param  array<string, mixed>  $clientOptions  Extra Guzzle options (timeout, handler...). Auth cannot be overridden.
+     *
+     * @throws \Freshdesk\Exceptions\InvalidConfigurationException
      */
-    private $api;
-
-    /**
-     * Api constructor.
-     * @param $key
-     * @param $domain
-     */
-    public function __construct($key, $domain)
+    public function __construct(string $key, string $domain, array $clientOptions = [])
     {
-        $this->api = new Freshdesk($key, $domain);
+        $this->api = new Freshdesk($key, $domain, $clientOptions);
     }
 
-    /**
-     * @return \Freshdesk\Resources\Agent
-     */
-    public function agents()
+    public function agents(): Agent
     {
         return $this->api->agents;
     }
 
-    /**
-     * @return \Freshdesk\Resources\Company
-     */
-    public function companies()
+    public function companies(): Company
     {
         return $this->api->companies;
     }
 
-    /**
-     * @return \Freshdesk\Resources\Contact
-     */
-    public function contacts()
+    public function contacts(): Contact
     {
         return $this->api->contacts;
     }
 
-    /**
-     * @return \Freshdesk\Resources\Group
-     */
-    public function groups()
+    public function groups(): Group
     {
         return $this->api->groups;
     }
 
-    /**
-     * @return \Freshdesk\Resources\Ticket
-     */
-    public function tickets()
+    public function tickets(): Ticket
     {
         return $this->api->tickets;
     }
 
-    /**
-     * @return \Freshdesk\Resources\TimeEntry
-     */
-    public function timeEntries()
+    public function timeEntries(): TimeEntry
     {
         return $this->api->timeEntries;
     }
 
-    /**
-     * @return \Freshdesk\Resources\Conversation
-     */
-    public function conversations()
+    public function conversations(): Conversation
     {
         return $this->api->conversations;
     }
 
     /**
-     * @return \Freshdesk\Resources\Category
+     * Forum categories (/discussions/categories).
      */
-    public function categories()
+    public function discussions(): Discussion
     {
-        return $this->api->categories;
+        return $this->api->discussions;
     }
 
     /**
-     * @return \Freshdesk\Resources\Forum
+     * @deprecated Use discussions(). Kept for backwards compatibility.
      */
-    public function forums()
+    public function categories(): Discussion
+    {
+        return $this->discussions();
+    }
+
+    public function forums(): Forum
     {
         return $this->api->forums;
     }
 
-    /**
-     * @return \Freshdesk\Resources\Topic
-     */
-    public function topics()
+    public function topics(): Topic
     {
         return $this->api->topics;
     }
 
-    /**
-     * @return \Freshdesk\Resources\Comment
-     */
-    public function comments()
+    public function comments(): Comment
     {
         return $this->api->comments;
     }
+
     /**
-     * @return \Freshdesk\Resources\EmailConfig
+     * Solution (knowledge base) categories.
      */
-    public function emailConfigs()
+    public function solutions(): Solution
+    {
+        return $this->api->solutions;
+    }
+
+    public function folders(): Folder
+    {
+        return $this->api->folders;
+    }
+
+    public function articles(): Article
+    {
+        return $this->api->articles;
+    }
+
+    public function emailConfigs(): EmailConfig
     {
         return $this->api->emailConfigs;
     }
 
-    /**
-     * @return \Freshdesk\Resources\Product
-     */
-    public function products()
+    public function products(): Product
     {
         return $this->api->products;
     }
 
-    /**
-     * @return \Freshdesk\Resources\BusinessHour
-     */
-    public function businessHours()
+    public function businessHours(): BusinessHour
     {
         return $this->api->businessHours;
     }
 
-    /**
-     * @return \Freshdesk\Resources\SLAPolicy
-     */
-    public function slaPolicies()
+    public function slaPolicies(): SLAPolicy
     {
         return $this->api->slaPolicies;
+    }
+
+    /**
+     * Headers of the most recent response (e.g. X-RateLimit-Remaining, Link).
+     *
+     * @return array<string, string[]>
+     */
+    public function lastResponseHeaders(): array
+    {
+        return $this->api->getLastResponseHeaders();
+    }
+
+    /**
+     * The underlying SDK client.
+     */
+    public function sdk(): Freshdesk
+    {
+        return $this->api;
     }
 }
